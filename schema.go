@@ -196,8 +196,11 @@ func (r *record) hydrate(model interface{}) error {
 
 func (r *record) model() *BaseModel {
 	var m *BaseModel
-	r.hydrate(&m)
-
+	err := r.hydrate(&m)
+	if err != nil {
+		// todo: update func to handle this error but for now at least log it
+		logError(err.Error())
+	}
 	return m
 }
 

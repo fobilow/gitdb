@@ -18,8 +18,8 @@ const fakeRemote = testData + "/online"
 var fakeRemoteCreated bool
 
 func init() {
-	SetLogLevel(LOGLEVEL_TEST)
-	// SetLogLevel(LOGLEVEL_ERROR)
+	// SetLogLevel(LOGLEVEL_TEST)
+	SetLogLevel(LOGLEVEL_ERROR)
 }
 
 func setup() {

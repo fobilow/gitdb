@@ -2,7 +2,6 @@ package gitdb
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -14,7 +13,10 @@ import (
 func insert(count int) {
 	fmt.Printf("inserting %d records\n", count)
 	for i := 0; i < count; i++ {
-		testDb.Insert(getTestMessage())
+		err := testDb.Insert(getTestMessage())
+		if err != nil {
+			logError(err.Error())
+		}
 	}
 	fmt.Println("done inserting")
 }
@@ -50,7 +52,7 @@ func doInsert(m Model, benchmark bool) error {
 			want = want[1 : len(want)-1]
 
 			if !strings.Contains(got, want) {
-				return errors.New(fmt.Sprintf("Want: %s, Got: %s", want, got))
+				return fmt.Errorf("Want: %s, Got: %s", want, got)
 			}
 		}
 	}
